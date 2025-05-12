@@ -1,58 +1,24 @@
-# BMS Fullstack Project
+# BMS Fullstack-projekt
 
-هذا المشروع يتكون من جزئين:
+Detta projekt består av två delar:
 
-- **Backend:** باستخدام Spring Boot وJava.
-- **Frontend:** باستخدام React.
+- **Backend:** med Spring Boot och Java.
+- **Frontend:** med React.
 
 ---
 
-## المتطلبات
+## Krav
 
-- Java 17 أو أحدث
+- Java 17 eller högre
 - Maven
 - Node.js + npm
 
 ---
 
-## طريقة التشغيل
+## Hur man kör projektet
 
-### 1. تشغيل الـ Backend
+### 1. Kör Backend
 
 ```bash
 cd backend
 mvn spring-boot:run
-```
-
-الخادم سيعمل على `http://localhost:8080`
-
----
-
-### 2. تشغيل الـ Frontend
-
-```bash
-cd frontend
-npm install
-npm start
-```
-
-الواجهة ستفتح تلقائيًا على `http://localhost:3000` وتتصل بـ backend تلقائيًا عبر proxy.
-
----
-
-## بنية المجلد
-
-```
-bms-fullstack/
-│
-├── backend/          ← مشروع Spring Boot
-│
-└── frontend/         ← مشروع React
-```
-
----
-
-## ملاحظات
-
-- يتم تخزين بيانات الجلسات في قاعدة بيانات SQLite محلية.
-- يمكن تحسين الواجهة لاحقًا لإظهار رسم بياني أو تنبيهات للأسعار.
