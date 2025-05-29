@@ -1,67 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMS Charging Dashboard</title>
+    <title>Startmeny</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>BMS Charging Dashboard</h1>
+            <h1>Välkommen till EV Laddsystem</h1>
         </header>
-
-        <section class="charging-options">
-            <h2>Starta Laddning</h2>
-            <div class="buttons">
-                <button class="charge-btn" onclick="startCharging(20)">Ladda till 20%</button>
-                <button class="charge-btn" onclick="startCharging(80)">Ladda till 80%</button>
-                <button class="charge-btn" onclick="startCharging(100)">Ladda till 100%</button>
-            </div>
-            <input type="time" id="schedule-time">
-            <button id="schedule-btn">Schemalägg Laddning</button>
-        </section>
-
-        <section class="charging-sessions">
-            <h2>Charging Sessions</h2>
-            <ul id="sessions-list">
-                <!-- Charging sessions will be displayed here -->
-            </ul>
-        </section>
-
-        <section class="best-time">
-            <h2>Bästa Tid att Ladda</h2>
-            <div id="best-time"></div>
-        </section>
-
-        <section class="charging-status">
-            <h2>Current Charging Status</h2>
-            <div id="charging-icon" style="font-size: 50px; display:none;">⚡</div>
-            <div class="progress-container" style="display:none;">
-                <div class="progress-bar" style="height: 30px; width: 0%; background: limegreen;"></div>
-            </div>
-            <p id="charging-time"></p>
-            <p id="charging-cost"></p>
-            <button id="stop-charging">Stoppa Laddning</button>
-            <button id="resume-charging" style="display:none;">Återuppta Laddning</button>
-        </section>
-
-        <footer>
-            <p>&copy; 2025 Battery Management System</p>
-        </footer>
-
-        <div class="schedule-container">
-            <h2>Schemalagda laddningar</h2>
-            <ul id="scheduled-list"></ul>
-        </div>
-        
-        <p id="station-status">Hämtar laddstationsstatus...</p>
-        <label for="schedule-percentage">Laddning till (%):</label>
-<input type="number" id="schedule-percentage" min="1" max="100" value="80" />
-
+       <button onclick="location.href='elpris.html'">⚡ elpris</button>
+        <button onclick="location.href='ladda.html'">🚗 Ladda bilen</button>
+        <button onclick="location.href='schema.html'">📅 Schemaladdning</button>
+        <button onclick="location.href='karta.html'">🗺️ Visa laddstationer</button>
     </div>
-
-    <script src="script.js"></script>
+    
 </body>
 </html>

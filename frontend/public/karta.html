@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Karta över laddstationer</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Närmaste laddstationer</h1>
+       <h2><a href="index.html" class="back-button">← Tillbaka</a>  </h2> 
+    </header>
+    <main class="map-container">
+        <iframe
+            src="https://www.google.com/maps?q=charging+stations+near+me&output=embed"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+    </main>
+</body>
+</html>

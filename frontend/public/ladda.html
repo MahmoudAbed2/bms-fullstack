@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Ladda bilen</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(5, 5, 5, 0.05);
+            padding: 100px;
+            border-radius: 100px;
+            box-shadow: 0 0 100px rgba(2, 2, 2, 0.2);
+            text-align: center;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 8px;
+            margin: 8px 0;
+            background: black;
+            color: #00ff88;
+            border: 1px solid #00ff88;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 50px;
+            padding: 10px 20px;
+            background-color: #7f0000;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00b84d;
+        }
+
+        .loading-animation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 100px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .car-icon {
+            font-size: 100px;
+            animation: bounce 1s infinite;
+        }
+
+        .charging-light {
+            width: 20px;
+            height: 20px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            margin-top: 8px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+
+
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Ladda bilen</h2>
+
+        <label for="start">Startprocent:</label><br>
+        <input type="number" id="start" min="0" max="100" value="20"> %
+
+        <br><br>
+
+        <label for="slut">Slutprocent:</label><br>
+        <input type="number" id="slut" min="0" max="100" value="80"> %
+
+        <br><br>
+
+        <button id="startChargingBtn" onclick="startCharging()">Starta laddning</button>
+        
+        <!-- Ny knapp för att gå tillbaka till hemsidan -->
+        <button id="homeBtn" onclick="goHome()" style="margin-top: 20px; font-size: 1.5rem; padding: 8px 16px; background-color: #444; border-radius: 5px;">Tillbaka till startsidan</button>
+
+        <div id="charging-animation" class="loading-animation" style="display: none;">
+            <div class="car-icon">🚗⚡</div>
+            <div class="charging-light"></div>
+            <p style="margin-top: 10px;">Laddning pågår...</p>
+        </div>
+    </div>
+
+    <script>
+        function startCharging() {
+            const start = document.getElementById('start').value;
+            const slut = document.getElementById('slut').value;
+
+            // Visa animation
+            const anim = document.getElementById("charging-animation");
+            anim.style.display = "flex";
+
+            // Dölj startknappen medan laddning pågår
+            document.getElementById("startChargingBtn").style.display = "none";
+
+            // Simulera laddning i 7 sekunder
+            setTimeout(() => {
+                anim.style.display = "none";
+                document.getElementById("startChargingBtn").style.display = "inline-block";
+                alert(`Laddning från ${start}% till ${slut}% är klar.`);
+            }, 7000);
+        }
+
+        function goHome() {
+            // Ändra denna URL till din riktiga hemsida
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elpris & Förbrukning</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #1c1c1c, #2c2c2c);
+      color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow-y: auto;
+      max-height: 90vh;
+    }
+    h1 {
+      font-size: 2.4rem;
+      color: #4CAF50;
+      margin-bottom: 30px;
+    }
+    .info-box {
+      margin: 20px 0;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border-left: 5px solid #4CAF50;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+      text-align: left;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      color: #eee;
+    }
+    th, td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #4CAF50;
+      text-align: center;
+      font-size: 1rem;
+    }
+    th {
+      background-color: rgba(76, 175, 80, 0.3);
+    }
+    button {
+      background: linear-gradient(135deg, #4CAF50, #388E3C);
+      color: #fff;
+      border: none;
+      padding: 14px 24px;
+      margin: 10px auto 0 auto;
+      font-size: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 200px;
+      display: block;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #43a047, #2e7d32);
+      transform: translateY(-2px);
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Elpris & Förbrukning EV</h1>
+    <div class="info-box" id="infoBox">Laddar total energiförbrukning EV-batteri...</div>
+    <div class="info-box" id="baseloadBox">Laddar hushållets energiförbrukning...</div>
+    <div class="info-box" id="priceBox">
+      <strong>Timpris (kr/kWh) under dygnet:</strong>
+      <table id="priceTable">
+        <thead>
+          <tr><th>Timme</th><th>Pris (kr/kWh)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="2">Laddar...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button onclick="hamtaData()">Uppdatera data</button>
+    <button onclick="window.location.href='index.html'">Tillbaka till hemsidan</button>
+  </div>
+
+  <script>
+    async function hamtaData() {
+      try {
+        // Mockdata för test (ersätt detta med riktiga fetch-anrop när backend är igång)
+        const infoData = { total_energy: 12.34 }; // Exempelvärde i kWh
+        const baseData = Array(24).fill(0).map((_, i) => 0.5 + Math.sin(i/3)); // Simulerad baseload per timme
+        const priceData = Array(24).fill(0).map((_, i) => 0.2 + 0.1 * Math.cos(i/4)); // Simulerad timpris
+
+        // Visa EV batteri info
+        document.getElementById('infoBox').textContent = `Total energiförbrukning EV-batteri: ${infoData.total_energy.toFixed(2)} kWh`;
+
+        // Visa hushållets baseload
+        const sumBaseLoad = baseData.reduce((a, b) => a + b, 0);
+        document.getElementById('baseloadBox').textContent = `Total hushållsförbrukning idag: ${sumBaseLoad.toFixed(2)} kWh`;
+
+        // Visa timpriser i tabell
+        const priceTableBody = document.querySelector('#priceTable tbody');
+        priceTableBody.innerHTML = ''; // rensa tidigare
+
+        priceData.forEach((pris, timme) => {
+          const row = document.createElement('tr');
+          const hourCell = document.createElement('td');
+          const priceCell = document.createElement('td');
+
+          hourCell.textContent = timme + ':00';
+          priceCell.textContent = pris.toFixed(2);
+
+          row.appendChild(hourCell);
+          row.appendChild(priceCell);
+          priceTableBody.appendChild(row);
+        });
+
+      } catch (error) {
+        document.getElementById('infoBox').textContent = 'Kunde inte hämta EV batteri info';
+        document.getElementById('baseloadBox').textContent = 'Kunde inte hämta hushållets förbrukning';
+        document.getElementById('priceBox').innerHTML = '<strong>Timpris (kr/kWh) under dygnet:</strong><p>Kunde inte hämta prisdata</p>';
+        console.error(error);
+      }
+    }
+
+    // Kör vid laddning av sidan
+    hamtaData();
+  </script>
+</body>
+</html>

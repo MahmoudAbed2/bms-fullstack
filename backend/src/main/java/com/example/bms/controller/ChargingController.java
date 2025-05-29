@@ -42,6 +42,12 @@ public class ChargingController {
         return service.getBestPriceTime();
     }
 
+@GetMapping("/status")
+public String chargingStatus() {
+    return "Systemet är igång och fungerar!";
+}
+
+
     // Stoppa laddning eller töm batteriet till 20%
     @PostMapping("/discharge")
     public String stopCharging() {
